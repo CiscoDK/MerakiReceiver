@@ -32,7 +32,7 @@ def writelog(txt):
     if log_file:
         f = open(log_file, 'a+')
         try:
-            f.write('%s: %s' % (datetime.datetime.now(), txt))
+            f.write('%s: %s \n\r' % (datetime.datetime.now(), txt))
         finally:
             f.close()
 
