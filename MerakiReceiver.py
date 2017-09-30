@@ -50,7 +50,7 @@ app.logger.debug("Secret key: " + app.config.get("SECRET_MERAKI_KEY"))
 
 
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/data/", methods=["GET","POST"])
 def main():
     """ Main entry point of the app """
     logger.info("hello world")
