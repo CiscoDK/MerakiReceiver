@@ -42,7 +42,7 @@ def main():
 
 if __name__ == "__main__":
     #app.run()
-    #### THIS IS NOT EXECUTED WHEN RUNNING FROM FLASK!!!
+    #### THIS IS NOT EXECUTED WHEN RUNNING FROM FLASK LOCAL?!!!
 
     print("Run via flask")
-    #main()
+    main()
