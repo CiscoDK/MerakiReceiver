@@ -18,6 +18,8 @@ import requests
 app = Flask(__name__)
 app.config.from_pyfile('MerakiReceiver.settings')
 
+print("Print from MerakiReceiver")
+sys.stdout.flush()
 app.logger.info("Launching MerakiReceiver")
 app.logger.debug("Secret key: " + app.config.get("SECRET_MERAKI_KEY"))
 
