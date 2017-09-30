@@ -6,6 +6,7 @@ from flask import *
 import sys
 import click
 import datetime
+import os # For enviroment stuff on Azure..
 
 
 
