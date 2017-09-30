@@ -63,7 +63,8 @@ def main():
 
         return "OK"
     elif request.method == 'GET':
-        return "Hello from the App"
+        #return "Hello from the App"
+        return app.config.get("SECRET_MERAKI_KEY")
 
 #@app.cli.command()
 #@click.argument('secret')
