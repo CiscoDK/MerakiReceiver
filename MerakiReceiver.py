@@ -58,7 +58,7 @@ def main():
     if request.method == 'POST':
         logger.info(request.form['apMac'])
         a = request.get_json()
-        writelog(a['secret'])
+        writelog(a)
 
         return "OK"
 
