@@ -56,9 +56,15 @@ def main():
     logger.info("hello world")
 
     if request.method == 'POST':
-        logger.info(request.form['apMac'])
+        #logger.info(request.form['apMac'])
+        app.logger.info("Got POST")
         a = request.get_json()
         writelog(a)
+        print(json.dumps(a,indent=4))
+
+        if a["type"] == "DevicesSeen": #WiFi (e.g. not BT)
+            print(a["secret"])
+            writelog(a["secret"])
 
         return "OK"
 
