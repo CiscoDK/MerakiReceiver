@@ -55,12 +55,12 @@ def main():
     """ Main entry point of the app """
     logger.info("hello world")
 
-
     if request.method == 'POST':
         logger.info(request.form['apMac'])
         writelog(request.form['secret'])
 
         return "OK"
+    
     elif request.method == 'GET':
         #return "Hello from the App"
         return app.config.get("SECRET_MERAKI_KEY")
