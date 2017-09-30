@@ -57,10 +57,11 @@ def main():
 
     if request.method == 'POST':
         logger.info(request.form['apMac'])
-        writelog(request.form['secret'])
+        a = request.get_json()
+        writelog(a['secret'])
 
         return "OK"
-    
+
     elif request.method == 'GET':
         #return "Hello from the App"
         return app.config.get("SECRET_MERAKI_KEY")
