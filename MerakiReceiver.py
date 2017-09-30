@@ -5,6 +5,8 @@ Module Docstring
 from flask import *
 import sys
 import click
+import datetime
+
 
 
 
@@ -18,10 +20,34 @@ import requests
 app = Flask(__name__)
 app.config.from_pyfile('MerakiReceiver.settings')
 
+
+
+
+
+
+def writelog(txt):
+    """Logs fatal errors to a log file if WSGI_LOG env var is defined"""
+    log_file = os.environ.get('NS_LOG')
+    if log_file:
+        f = open(log_file, 'a+')
+        try:
+            f.write('%s: %s' % (datetime.datetime.now(), txt))
+        finally:
+            f.close()
+
+
+### Main entry point
+
+
 print("Print from MerakiReceiver")
+writelog("Log from MerakiReceiver")
 sys.stdout.flush()
 app.logger.info("Launching MerakiReceiver")
 app.logger.debug("Secret key: " + app.config.get("SECRET_MERAKI_KEY"))
+
+
+
+
 
 @app.route("/", methods=["GET","POST"])
 def main():
@@ -32,6 +58,7 @@ def main():
 
     if request.method == 'POST':
         logger.info(request.form['apMac'])
+        writelog(request.form['apMac'])
 
         return "OK"
     elif request.method == 'GET':
