@@ -54,12 +54,11 @@ app.logger.debug("Secret key: " + app.config.get("SECRET_MERAKI_KEY"))
 def main():
     """ Main entry point of the app """
     logger.info("hello world")
-    logger.info("Secret is " + "bla")
 
 
     if request.method == 'POST':
         logger.info(request.form['apMac'])
-        writelog(request.form['apMac'])
+        writelog(request.form['secret'])
 
         return "OK"
     elif request.method == 'GET':
