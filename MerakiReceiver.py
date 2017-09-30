@@ -20,8 +20,6 @@ app.config.from_pyfile('MerakiReceiver.settings')
 
 app.logger.info("Launching MerakiReceiver")
 app.logger.debug("Secret key: " + app.config.get("SECRET_MERAKI_KEY"))
-#app.config['secret'] = sys.argv[0]
-#@app.cli.command()
 
 @app.route("/", methods=["GET","POST"])
 def main():
@@ -37,13 +35,13 @@ def main():
     elif request.method == 'GET':
         return "Hello from the App"
 
-@app.cli.command()
-@click.argument('secret')
-def start():
-    pass
+#@app.cli.command()
+#@click.argument('secret')
+#def start():
+ #   pass
 
 if __name__ == "__main__":
-    app.run()
+    #app.run()
     #### THIS IS NOT EXECUTED WHEN RUNNING FROM FLASK!!!
 
     print("Run via flask")
