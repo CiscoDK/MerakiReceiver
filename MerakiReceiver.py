@@ -35,7 +35,7 @@ def main():
 
         return "OK"
     elif request.method == 'GET':
-        return ""
+        return "Hello from the App"
 
 @app.cli.command()
 @click.argument('secret')
