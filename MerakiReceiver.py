@@ -43,6 +43,7 @@ def start():
     pass
 
 if __name__ == "__main__":
+    app.run()
     #### THIS IS NOT EXECUTED WHEN RUNNING FROM FLASK!!!
 
     print("Run via flask")
