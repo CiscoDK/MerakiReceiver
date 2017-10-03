@@ -8,6 +8,7 @@ import click
 import datetime
 import os # For enviroment stuff on Azure..
 
+import sqlite3
 
 
 
@@ -20,7 +21,6 @@ import requests
 
 app = Flask(__name__)
 app.config.from_pyfile('MerakiReceiver.settings')
-
 
 
 
@@ -66,21 +66,42 @@ def main():
             print(a["secret"])
             writelog(a["secret"])
 
+            conn = sqlite3.connect('MerakiReceiver.db')
+            c = conn.cursor()
+
+            for o in a["data"]["observations"]:
+                c.execute("INSERT INTO RawData VALUES ('" + a["data"]["apMac"] + "','"+ o["seenTime"] +"','"+ o["clientMac"] +"','"+ str(o["rssi"]) +"')")
+
+
+
+            conn.commit()
+            print(a["data"]["apMac"])
+
+            conn.close()
+
         return "OK"
 
     elif request.method == 'GET':
         #return "Hello from the App"
         return app.config.get("SECRET_MERAKI_KEY")
 
-#@app.cli.command()
+@app.cli.command()
 #@click.argument('secret')
-#def start():
- #   pass
+def initdb():
+    conn = sqlite3.connect('MerakiReceiver.db')
+
+    c = conn.cursor()
+    c.execute('''CREATE TABLE RawData
+                 (apMac text, seenTime text, clientMac text, rssi real)''')
+
+    conn.commit()
+
+    conn.close()
+
 
 if __name__ == "__main__":
     #app.run()
     #### THIS IS NOT EXECUTED WHEN RUNNING FROM FLASK LOCAL?!!!
 
-    print("Run via flask")
-    sys.stdout.flush()
+    print("EXECUTED STANDALONE")
     #main()
